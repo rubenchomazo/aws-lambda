@@ -40,7 +40,7 @@ public class EmployeeHandler
         try {
             String body = request.getBody();
             log.info("Function: " + context.getFunctionName());
-            log.info("Request Body: " + body);
+            log.info("Request Body : " + body);
             Employee employee = null;
             if (body != null) {
                 employee = new Gson().fromJson(request.getBody(), Employee.class);
