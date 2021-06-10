@@ -7,18 +7,24 @@ jobs:
     env:
       AWS_S3_BUCKET_NAME: s3://devops-aws-lambdas-java
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-    - name: mvn Clean
-      run: mvn clean
-    - name: Install mvn and dependencies
-      run: mvn -B package --file pom.xml           
-    - name: Deploy S3 Bucket Jar
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_S3_BUCKET: ${{ env.AWS_S3_BUCKET_NAME }}
-      run: aws s3 cp --region us-east-1 target/aws-lambda-1.0.jar s3://devops-aws-lambdas-java
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: mvn Clean
+        run: mvn clean
+      - name: Install mvn and dependencies
+        run: mvn -B package --file pom.xml
+      - name: Deploy S3 Bucket Jar
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: ${{ env.AWS_S3_BUCKET_NAME }}
+        run: aws s3 cp --region us-east-1 target/aws-lambda-1.0.jar s3://devops-aws-lambdas-java
+      - name: Deploy Lambda function
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: ${{ env.AWS_S3_BUCKET_NAME }}
+        run: aws lambda update-function-code --function-name "save-employee" --s3-bucket "devops-aws-lambdas-java" --s3-key "aws-lambda-1.0.jar" --region "us-east-1"
