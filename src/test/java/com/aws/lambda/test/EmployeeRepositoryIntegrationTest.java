@@ -50,6 +50,7 @@ public class EmployeeRepositoryIntegrationTest {
     }
 
     @Test
+    @Ignore
     public void testSaveOrEmployee() {
         Employee employee = new Employee();
         employee.setId("003");
@@ -60,6 +61,7 @@ public class EmployeeRepositoryIntegrationTest {
 
 
     @Test
+    @Ignore
     public void testGetEmployees() {
         List<Employee> employeeList = (List<Employee>) repository.findAll();
         assertTrue(employeeList != null);
