@@ -8,6 +8,7 @@ import com.aws.lambda.StartApplication;
 import com.aws.lambda.entity.Employee;
 import com.aws.lambda.repositories.EmployeeRepository;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class EmployeeRepositoryIntegrationTest {
     }
 
     @Test
+    @Ignore
     public void testSaveOrProduct() {
         Employee employee = new Employee();
         employee.setId("003");
