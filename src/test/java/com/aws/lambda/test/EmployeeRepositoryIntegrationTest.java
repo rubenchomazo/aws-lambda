@@ -51,7 +51,7 @@ public class EmployeeRepositoryIntegrationTest {
     @Test
     public void testSaveOrProduct() {
         Employee employee = new Employee();
-        employee.setId("001");
+        employee.setId("003");
         employee.setName("Rubencho");
         Employee employeeResp = repository.save(employee);
         assertTrue(employeeResp != null);
