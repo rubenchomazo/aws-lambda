@@ -32,8 +32,8 @@ public class PingControllerTest {
         ResponseEntity<String> response = restTemplate.getForEntity("/ping", String.class);
         //printJSON(response);
         String expectedJson = "pong";
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(expectedJson, response.getBody());
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(expectedJson, response.getBody());
 
     }
 }
